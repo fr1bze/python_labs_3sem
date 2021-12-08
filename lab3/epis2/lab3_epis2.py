@@ -1,17 +1,22 @@
-import numpy as np
+from matplotlib import colors
 import matplotlib.pyplot as plt
-path1 = '/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal01.dat'
-path2 = '/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal02.dat'
-path3 = '/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal03.dat'
-a1 = np.loadtxt(path1)
-a2 = np.loadtxt(path2)
-a3 = np.loadtxt(path3)
-def moving_average(a, n = 10):
-    res = np.cumsum(a, dtype=float)
-    res[n:] = res[n:] - res[:-n]
-    return res[n - 1:] / n
+import numpy as np
+#path1 = '/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal01.dat'
+#path2 = '/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal02.dat'
+#path3 = '/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal03.dat'
+#print(a1[1:10])
+def running_mean(x, n = 10):
+    arr = np.zeros(x.shape,dtype = float)
+    cumsum = np.cumsum(x) 
+    arr[:n] = cumsum[:n] / np.arange(1, n + 1)
+    arr[n:] = (cumsum[n:] - cumsum[:-n]) / float(n)
+    return arr
 #print(moving_average(a1))
-print(np.shape(a1),np.shape(moving_average(a1)))
-plt.plot(a1)
-plt.plot(moving_average(a1))
-plt.show()
+for i in range(1,4):
+    data = np.loadtxt(f'/Users/mikhail/Desktop/python_3sem/laba/lab3/epis2/signal0{i}.dat',dtype = float)
+    fig, axes = plt.subplots(1,2)
+    axes[0].plot(data, color = 'green') 
+    axes[0].set_title('Сигнал до усреднения')
+    axes[1].plot(running_mean(data))
+    axes[1].set_title('Сигнал после усреднения')
+    plt.show()
