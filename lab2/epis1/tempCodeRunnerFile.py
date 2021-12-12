@@ -1,0 +1,1 @@
+/Users/mikhail/Desktop/python_3sem/laba/lab2/epis1/
