@@ -15,7 +15,7 @@ for i in range(6):
     ax[int(i / 3)][i % 3].grid(which='major', color = 'gray')
 plt.subplots_adjust(wspace = 0.2, hspace = 0.4)
 plt.suptitle("Episode 2")
-plt.savefig('lab_2.png', dpi = 1500)
+plt.savefig('lab_2.png', bbox_inches='tight')
 plt.show()
 
         
