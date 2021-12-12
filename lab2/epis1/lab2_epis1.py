@@ -1,6 +1,6 @@
 import pandas as pd
 
-path = '/Users/mikhail/Desktop/python_3sem/laba/lab2/transactions.csv'
+path = '/Users/mikhail/Desktop/python_3sem/laba/lab2/epis1/transactions.csv'
 data = pd.read_csv(path, sep = ',').loc[:, 'CONTRACTOR':'SUM'] #исключаем ненужный первый столбец
 #print(data)
 flex_data = data[data['STATUS'] == 'OK']
