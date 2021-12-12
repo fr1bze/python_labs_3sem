@@ -2,17 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 path = '/Users/mikhail/Desktop/python_3sem/laba/lab2/epis2/flights.csv'
-data = pd.read_csv(path, sep = ',').loc[:, 'CARGO':'WEIGHT'] #исключаем ненужный первый столбец
-#print(data)
-x = dict(data.groupby(by = 'CARGO').count().loc[:,'PRICE']) #количество перевозок
-#print(x)
-df = pd.DataFrame(list(x.items()),
-                   columns=['CARGO', 'COUNT'])
-cargo_data = data.groupby(by = 'CARGO', as_index=False).sum()
-df = df.merge(cargo_data, on = 'CARGO')
-fig, axes = plt.subplots(3, 1, figsize=(10, 8))
-plt.subplots_adjust(wspace=3, hspace= 1)
-target1 = [axes[0], axes[1], axes[2]]
-df.plot(subplots=True,x = 'CARGO', ax=target1, legend=True, sharex=False, sharey=False, kind = 'bar')
+data = pd.read_csv(path) #исключаем ненужный первый столбец
+
+fig, axes = plt.subplots(3, 1, figsize=(10, 10))
+data.groupby('CARGO').count()['Unnamed: 0'].plot(kind='bar', ax=axes[0], title='Amount of flights')
+data.groupby('CARGO').sum()['PRICE'].plot(kind='bar', ax=axes[1], title='Price', color = 'orange')
+data.groupby('CARGO').sum()['WEIGHT'].plot(kind='bar', ax=axes[2], title='Weight', color = 'green')
 plt.show()
 #plt.savefig('fig_epis2.png') #сохранение картинки 
