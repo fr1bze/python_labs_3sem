@@ -8,7 +8,7 @@ fig, axes = plt.subplots(2, 1,gridspec_kw={"hspace": 0.7}, figsize=[11, 8])
 
 dFrame = pd.merge(students, results, on='login')
 x = dFrame.groupby(by = 'group_faculty').mean()['Solved'].plot(kind='bar', ax=axes[0], color = 'blue', xlabel = 'номер факультетских групп')
-y= dFrame.groupby(by = 'group_out').mean()['Solved'].plot(kind='bar', ax=axes[1], color ='red', xlabel = 'номер групп по информатике')
+y = dFrame.groupby(by = 'group_out').mean()['Solved'].plot(kind='bar', ax=axes[1], color ='red', xlabel = 'номер групп по информатике')
 data_all_res = dFrame[dFrame['H'] >= 10].groupby(by = 'group_faculty', as_index=False).count()
 data_all_res_inf_gr = dFrame[(dFrame['G'] > 10) | (dFrame['H'] > 10)].groupby(by = 'group_out', as_index=False).count()
 print(data_all_res.loc[:,['group_faculty', 'H']])
